@@ -18,7 +18,13 @@ const ArchiveListWrapper = () => {
     setSearchParams({ title: keyword });
   };
 
-  return <ArchiveList navigate={navigate} noteTitle={noteTitle} changeSearchParams={changeSearchParams} />;
+  return (
+    <ArchiveList
+      navigate={navigate}
+      noteTitle={noteTitle}
+      changeSearchParams={changeSearchParams}
+    />
+  );
 };
 
 class ArchiveList extends Component {
@@ -26,7 +32,9 @@ class ArchiveList extends Component {
     super(props);
 
     this.state = {
-      notes: (props.noteTitle && searchNotes(props.noteTitle, false)) || getArchivedNotes(),
+      notes:
+        (props.noteTitle && searchNotes(props.noteTitle, false)) ||
+        getArchivedNotes(),
       transition: false,
       color: "",
       showSearchbar: false,
@@ -42,7 +50,7 @@ class ArchiveList extends Component {
       color,
     });
     setTimeout(() => {
-      this.props.navigate(`/note/${id}`);
+      this.props.navigate(`/note-app-local/note/${id}`);
     }, 800);
   };
 
@@ -68,13 +76,39 @@ class ArchiveList extends Component {
   render() {
     return (
       <>
-        <div className={`page-overlay ${this.state.transition ? this.state.color : ""} dark`} onClick={() => this.toggleSearchBar(false)}>
-          <div className={`notes-wrapper ${this.state.transition ? "hide" : ""}`}>
-            {this.state.notes.length !== 0 ? this.state.notes.map((note) => <NoteCard note={note} showSelectedNote={this.showSelectedNote} key={note.id} />) : <EmptyState message="Archive's not found" />}
+        <div
+          className={`page-overlay ${
+            this.state.transition ? this.state.color : ""
+          } dark`}
+          onClick={() => this.toggleSearchBar(false)}
+        >
+          <div
+            className={`notes-wrapper ${this.state.transition ? "hide" : ""}`}
+          >
+            {this.state.notes.length !== 0 ? (
+              this.state.notes.map((note) => (
+                <NoteCard
+                  note={note}
+                  showSelectedNote={this.showSelectedNote}
+                  key={note.id}
+                />
+              ))
+            ) : (
+              <EmptyState message="Archive's not found" />
+            )}
 
-            <DashboardActions showSearchbar={this.state.showSearchbar} toggleSearchBar={this.toggleSearchBar} />
+            <DashboardActions
+              showSearchbar={this.state.showSearchbar}
+              toggleSearchBar={this.toggleSearchBar}
+            />
 
-            <SearchBar showSearchbar={this.state.showSearchbar} toggleSearchBar={this.toggleSearchBar} keyword={this.state.keyword} keywordHandler={this.keywordHandler} onSearch={this.onSearch} />
+            <SearchBar
+              showSearchbar={this.state.showSearchbar}
+              toggleSearchBar={this.toggleSearchBar}
+              keyword={this.state.keyword}
+              keywordHandler={this.keywordHandler}
+              onSearch={this.onSearch}
+            />
           </div>
         </div>
       </>

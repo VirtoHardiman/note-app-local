@@ -1,20 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineMoreVert, MdClose, MdOutlineDelete, MdOutlinePalette, MdOutlineArchive, MdOutlineUnarchive } from "react-icons/md";
+import {
+  MdOutlineMoreVert,
+  MdClose,
+  MdOutlineDelete,
+  MdOutlinePalette,
+  MdOutlineArchive,
+  MdOutlineUnarchive,
+} from "react-icons/md";
 import PropTypes from "prop-types";
 
 import { deleteNote, archiveNote, unarchiveNote } from "../utils/local-data";
 
-const ActionButtons = ({ note, showButtons, toggleActionButtons, colorPalette, toggleColorPalette, changeNoteColor }) => {
+const ActionButtons = ({
+  note,
+  showButtons,
+  toggleActionButtons,
+  colorPalette,
+  toggleColorPalette,
+  changeNoteColor,
+}) => {
   const navigate = useNavigate();
-  const colors = ["orange", "peachOrange", "greyGreen", "blue", "purple", "pink", "green"];
+  const colors = [
+    "orange",
+    "peachOrange",
+    "greyGreen",
+    "blue",
+    "purple",
+    "pink",
+    "green",
+  ];
   const { id, archived, color } = note;
 
   return (
     <div className="note-actions">
       {showButtons ? (
         <>
-          <button onClick={() => toggleActionButtons(false)} className="close-button">
+          <button
+            onClick={() => toggleActionButtons(false)}
+            className="close-button"
+          >
             <MdClose className="close-icon" alt="close-icon" />
           </button>
 
@@ -22,17 +47,20 @@ const ActionButtons = ({ note, showButtons, toggleActionButtons, colorPalette, t
             <button
               onClick={() => {
                 unarchiveNote(id);
-                navigate("/");
+                navigate("/note-app-local");
               }}
               className="unarchive-button"
             >
-              <MdOutlineUnarchive className="unarchive-icon" alt="unarchive-icon" />
+              <MdOutlineUnarchive
+                className="unarchive-icon"
+                alt="unarchive-icon"
+              />
             </button>
           ) : (
             <button
               onClick={() => {
                 archiveNote(id);
-                navigate("/archives");
+                navigate("/note-app-local/archives");
               }}
               className="archive-button"
             >
@@ -46,14 +74,20 @@ const ActionButtons = ({ note, showButtons, toggleActionButtons, colorPalette, t
 
           <div className={`color-picker ${colorPalette ? "" : "hide"}`}>
             {colors.map((colorName, index) => (
-              <div key={index} className={`color-option ${colorName} ${archived ? "dark" : ""} ${colorName === color ? "selected" : ""}`} onClick={() => changeNoteColor(colorName)}></div>
+              <div
+                key={index}
+                className={`color-option ${colorName} ${
+                  archived ? "dark" : ""
+                } ${colorName === color ? "selected" : ""}`}
+                onClick={() => changeNoteColor(colorName)}
+              ></div>
             ))}
           </div>
 
           <button
             onClick={() => {
               deleteNote(id);
-              navigate("/");
+              navigate("/note-app-local");
             }}
             className="delete-button"
           >
@@ -61,7 +95,10 @@ const ActionButtons = ({ note, showButtons, toggleActionButtons, colorPalette, t
           </button>
         </>
       ) : (
-        <button onClick={() => toggleActionButtons(true)} className="more-button">
+        <button
+          onClick={() => toggleActionButtons(true)}
+          className="more-button"
+        >
           <MdOutlineMoreVert className="more-icon" alt="more-icon" />
         </button>
       )}

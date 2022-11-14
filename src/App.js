@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NoteDetail from "./pages/NoteDetail";
 import NoteList from "./pages/NoteList";
@@ -14,11 +14,10 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/note-app-local" element={<Navigate replace to="/" />} />
-        <Route path="/" element={<NoteList />} />
-        <Route path="/archives" element={<ArchiveList />} />
-        <Route path="/note/:id" element={<NoteDetail />} />
-        <Route path="/new" element={<AddNote />} />
+        <Route path="/note-app-local" element={<NoteList />} />
+        <Route path="/note-app-local/archives" element={<ArchiveList />} />
+        <Route path="/note-app-local/note/:id" element={<NoteDetail />} />
+        <Route path="/note-app-local/new" element={<AddNote />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

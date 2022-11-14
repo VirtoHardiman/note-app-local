@@ -24,7 +24,15 @@ class AddNote extends Component {
       body: "",
       color: "orange",
       showColors: false,
-      colors: ["orange", "peachOrange", "greyGreen", "blue", "purple", "pink", "green"],
+      colors: [
+        "orange",
+        "peachOrange",
+        "greyGreen",
+        "blue",
+        "purple",
+        "pink",
+        "green",
+      ],
       error: false,
       errorMessage: "",
     };
@@ -63,7 +71,7 @@ class AddNote extends Component {
       return this.triggerErrorToast("Note content is required!");
     }
     addNote(this.state.title, this.state.body, this.state.color);
-    this.props.navigate("/");
+    this.props.navigate("/note-app-local");
   };
 
   toggleColorPalette = () => {
@@ -81,13 +89,27 @@ class AddNote extends Component {
   render() {
     return (
       <>
-        <ErrorToast error={this.state.error} errorMessage={this.state.errorMessage} />
+        <ErrorToast
+          error={this.state.error}
+          errorMessage={this.state.errorMessage}
+        />
 
         <div className={`add-note ${this.state.color}`}>
           <form className="add-container">
-            <TextareaAutosize value={this.state.title} placeholder="e.g Today's Agenda" className="title-input" onInput={this.titleInputHandler} />
+            <TextareaAutosize
+              value={this.state.title}
+              placeholder="e.g Today's Agenda"
+              className="title-input"
+              onInput={this.titleInputHandler}
+            />
 
-            <ContentEditable innerRef={this.contentEditable} html={this.state.body} onChange={this.bodyInputHandler} data-placeholder="e.g 1. Jogging at 8 AM" className="body-input" />
+            <ContentEditable
+              innerRef={this.contentEditable}
+              html={this.state.body}
+              onChange={this.bodyInputHandler}
+              data-placeholder="e.g 1. Jogging at 8 AM"
+              className="body-input"
+            />
 
             <button
               onClick={(event) => {
@@ -99,13 +121,27 @@ class AddNote extends Component {
               <MdOutlineCheck className="check-icon" />
             </button>
 
-            <button type="button" onClick={this.toggleColorPalette} className="palette-button add">
+            <button
+              type="button"
+              onClick={this.toggleColorPalette}
+              className="palette-button add"
+            >
               <MdOutlinePalette className="palette-icon" />
             </button>
 
-            <div className={`color-picker add ${this.state.showColors ? "" : "hide"}`}>
+            <div
+              className={`color-picker add ${
+                this.state.showColors ? "" : "hide"
+              }`}
+            >
               {this.state.colors.map((colorName, index) => (
-                <div key={index} className={`color-option ${colorName} ${colorName === this.state.color ? "selected" : ""}`} onClick={() => this.changeColor(colorName)}></div>
+                <div
+                  key={index}
+                  className={`color-option ${colorName} ${
+                    colorName === this.state.color ? "selected" : ""
+                  }`}
+                  onClick={() => this.changeColor(colorName)}
+                ></div>
               ))}
             </div>
           </form>

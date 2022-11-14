@@ -18,14 +18,22 @@ const NoteListWrapper = () => {
     setSearchParams({ title: keyword });
   };
 
-  return <NoteList navigate={navigate} noteTitle={noteTitle} changeSearchParams={changeSearchParams} />;
+  return (
+    <NoteList
+      navigate={navigate}
+      noteTitle={noteTitle}
+      changeSearchParams={changeSearchParams}
+    />
+  );
 };
 
 class NoteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: (props.noteTitle && searchNotes(props.noteTitle, true)) || getActiveNotes(),
+      notes:
+        (props.noteTitle && searchNotes(props.noteTitle, true)) ||
+        getActiveNotes(),
       transition: false,
       color: "",
       showSearchbar: false,
@@ -40,7 +48,7 @@ class NoteList extends Component {
       color,
     });
     setTimeout(() => {
-      this.props.navigate(`/note/${id}`);
+      this.props.navigate(`/note-app-local/note/${id}`);
     }, 800);
   };
 
@@ -66,13 +74,39 @@ class NoteList extends Component {
   render() {
     return (
       <>
-        <div className={`page-overlay ${this.state.transition ? this.state.color : ""}`} onClick={() => this.toggleSearchBar(false)}>
-          <div className={`notes-wrapper ${this.state.transition ? "hide" : ""}`}>
-            {this.state.notes.length !== 0 ? this.state.notes.map((note) => <NoteCard note={note} showSelectedNote={this.showSelectedNote} key={note.id} />) : <EmptyState message="Note's not found" />}
+        <div
+          className={`page-overlay ${
+            this.state.transition ? this.state.color : ""
+          }`}
+          onClick={() => this.toggleSearchBar(false)}
+        >
+          <div
+            className={`notes-wrapper ${this.state.transition ? "hide" : ""}`}
+          >
+            {this.state.notes.length !== 0 ? (
+              this.state.notes.map((note) => (
+                <NoteCard
+                  note={note}
+                  showSelectedNote={this.showSelectedNote}
+                  key={note.id}
+                />
+              ))
+            ) : (
+              <EmptyState message="Note's not found" />
+            )}
 
-            <DashboardActions showSearchbar={this.state.showSearchbar} toggleSearchBar={this.toggleSearchBar} />
+            <DashboardActions
+              showSearchbar={this.state.showSearchbar}
+              toggleSearchBar={this.toggleSearchBar}
+            />
 
-            <SearchBar showSearchbar={this.state.showSearchbar} toggleSearchBar={this.toggleSearchBar} keyword={this.state.keyword} keywordHandler={this.keywordHandler} onSearch={this.onSearch} />
+            <SearchBar
+              showSearchbar={this.state.showSearchbar}
+              toggleSearchBar={this.toggleSearchBar}
+              keyword={this.state.keyword}
+              keywordHandler={this.keywordHandler}
+              onSearch={this.onSearch}
+            />
           </div>
         </div>
       </>

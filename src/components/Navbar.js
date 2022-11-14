@@ -5,23 +5,29 @@ import { getNote } from "../utils/local-data";
 
 const Navbar = () => {
   const currentURL = useLocation().pathname;
-  const noteListURL = "/";
-  const archiveListURL = "/archives";
+  const noteListURL = "/note-app-local";
+  const archiveListURL = "/note-app-local/archives";
   const noteDetailURL = currentURL.includes("note-");
   let noteDetailType = "";
 
   if (noteDetailURL) {
     const noteId = currentURL.slice(6);
     if (getNote(noteId)) {
-      getNote(noteId).archived ? (noteDetailType = "archive") : (noteDetailType = "note");
+      getNote(noteId).archived
+        ? (noteDetailType = "archive")
+        : (noteDetailType = "note");
     }
   }
 
   return (
     <nav>
-      <Link to="/">NoteApp</Link>
-      {(currentURL === noteListURL || noteDetailType === "archive") && <Link to="/archives">Archives</Link>}
-      {(currentURL === archiveListURL || noteDetailType === "note") && <Link to="/">Notes</Link>}
+      <Link to="/note-app-local">NoteApp</Link>
+      {(currentURL === noteListURL || noteDetailType === "archive") && (
+        <Link to="/note-app-local/archives">Archives</Link>
+      )}
+      {(currentURL === archiveListURL || noteDetailType === "note") && (
+        <Link to="/note-app-local">Notes</Link>
+      )}
     </nav>
   );
 };
