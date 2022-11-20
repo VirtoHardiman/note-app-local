@@ -48,7 +48,7 @@ class NoteList extends Component {
       color,
     });
     setTimeout(() => {
-      this.props.navigate(`/note-app-local/note/${id}`);
+      this.props.navigate(`/note/${id}`);
     }, 800);
   };
 

@@ -5,8 +5,8 @@ import { getNote } from "../utils/local-data";
 
 const Navbar = () => {
   const currentURL = useLocation().pathname;
-  const noteListURL = "/note-app-local";
-  const archiveListURL = "/note-app-local/archives";
+  const noteListURL = "/";
+  const archiveListURL = "/archives";
   const noteDetailURL = currentURL.includes("note-");
   let noteDetailType = "";
 
@@ -21,12 +21,12 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/note-app-local">NoteApp</Link>
+      <Link to="/">NoteApp</Link>
       {(currentURL === noteListURL || noteDetailType === "archive") && (
-        <Link to="/note-app-local/archives">Archives</Link>
+        <Link to="/archives">Archives</Link>
       )}
       {(currentURL === archiveListURL || noteDetailType === "note") && (
-        <Link to="/note-app-local">Notes</Link>
+        <Link to="/">Notes</Link>
       )}
     </nav>
   );

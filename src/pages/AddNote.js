@@ -71,7 +71,7 @@ class AddNote extends Component {
       return this.triggerErrorToast("Note content is required!");
     }
     addNote(this.state.title, this.state.body, this.state.color);
-    this.props.navigate("/note-app-local");
+    this.props.navigate("/");
   };
 
   toggleColorPalette = () => {

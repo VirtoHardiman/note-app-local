@@ -8,10 +8,7 @@ const DashboardActions = ({ showSearchbar, toggleSearchBar }) => {
 
   return (
     <>
-      <button
-        onClick={() => navigate("/note-app-local/new")}
-        className="add-button"
-      >
+      <button onClick={() => navigate("/new")} className="add-button">
         <MdOutlineNoteAdd className="add-icon" alt="add-icon" />
       </button>
       {!showSearchbar && (

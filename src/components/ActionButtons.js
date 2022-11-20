@@ -47,7 +47,7 @@ const ActionButtons = ({
             <button
               onClick={() => {
                 unarchiveNote(id);
-                navigate("/note-app-local");
+                navigate("/");
               }}
               className="unarchive-button"
             >
@@ -60,7 +60,7 @@ const ActionButtons = ({
             <button
               onClick={() => {
                 archiveNote(id);
-                navigate("/note-app-local/archives");
+                navigate("/archives");
               }}
               className="archive-button"
             >
@@ -87,7 +87,7 @@ const ActionButtons = ({
           <button
             onClick={() => {
               deleteNote(id);
-              navigate("/note-app-local");
+              navigate("/");
             }}
             className="delete-button"
           >
